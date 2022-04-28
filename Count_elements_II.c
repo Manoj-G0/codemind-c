@@ -1,0 +1,71 @@
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+    int n1,n2,i,a[1000],b[100],s=0,j,k,sum=0;
+    scanf("%d%d",&n1,&n2);
+    for(i=0;i<n1;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    for(i=0;i<n2;i++)
+    {
+        scanf("%d",&b[i]);
+    }
+    for(i=0;i<n1;i++)
+    {
+        for(j=i+1;j<n1;j++)
+        {
+            if(a[i]==a[j])
+            {
+                for(k=j;k<n1;k++)
+                a[k]=a[k+1];
+                j--;
+                n1--;
+            }
+        }
+    }
+    for(i=0;i<n2;i++)
+    {
+        for(j=i+1;j<n2;j++)
+        {
+            if(b[i]==b[j])
+            {
+                for(k=j;k<n2;k++)
+                b[k]=b[k+1];
+                j--;
+                n2--;
+            }
+        }
+    }
+    for(i=0;i<n1;i++)
+    {
+        int flag=0;
+        for(j=0;j<n2;j++)
+        {
+            if(a[i]==b[j])
+            {
+                flag=1;
+                break;
+            }
+        }
+        if(flag==0)
+        s++;
+    }
+    for(i=0;i<n2;i++)
+    {
+        int pump=0;
+        for(j=0;j<n1;j++)
+        {
+            if(b[i]==a[j])
+            {
+                pump=1;
+                break;
+            }
+        }
+        if(pump==0)
+        sum++;
+    }
+    printf("%d",sum+s);
+    
+}
