@@ -1,0 +1,97 @@
+#include<stdio.h>
+#include<stdlib.h>
+int *q,val;
+int front=-1;
+int rear=-1,n;
+void enque(int val)
+{
+	if((front==0 && rear==n-1) || rear+1==front)
+	{
+		printf("overflow\n");
+	}
+	else if(front==-1 && rear==-1)
+	{
+		rear=(rear+1)%n;
+		q[rear]=val;
+		front=0;
+	}
+	else
+	{
+		rear=(rear+1)%n;
+		q[rear]=val;
+	}
+}
+int deque()
+{
+	if(front==-1 && rear==-1)
+	{
+		return -1;//return front or rear
+	}
+	else if(front==rear)
+	{
+		val=q[front];
+		front=-1;
+		rear=-1;
+	}
+	else
+	{
+		val=q[front];
+		front=(front+1)%n;
+	}
+	
+}
+void display()
+{
+	int i,j;
+	if(front==0 && rear==n-1)
+	{
+		printf("stack is full\n");
+	}
+	else
+	{
+		i=front;
+		j=rear;
+		while(i!=j)
+		{
+			printf("%d ",q[i]);
+			i=(i+1)%n;
+		}
+		printf("\n");
+	}
+}
+int main()
+{
+	int ch;
+	scanf("%d",&n);
+	q=(int *)calloc(n,sizeof(int));
+	while(1)
+	{
+		printf("1. enque() 2. deque()  3. display 4. exit\n");
+		scanf("%d",&ch);
+		if(ch==1)
+		{
+			scanf("%d",&val);
+			enque(val);
+		}
+		else if(ch==2)
+		{
+			val=deque();
+			if(val==-1)
+			{
+				printf("under flow\n");
+			}
+			else
+			{
+			printf("%d\n",val);
+		    }
+		}
+		else if(ch==3)
+		{
+			display();
+		}
+		else
+		{
+			break;
+		}
+	}
+}
