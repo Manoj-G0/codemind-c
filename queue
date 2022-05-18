@@ -1,0 +1,103 @@
+/*Queue:  FIFO,LILO
+
+front = -1
+rear = -1
+enque
+deque
+insertion ----> rear end
+deletion -----> front end
+overflow
+*/
+#include<stdio.h>
+#include<stdlib.h>
+int *q,val;
+int front=-1;
+int rear=-1,n;
+void enque(int val)
+{
+	if(rear==n-1)
+	{
+		printf("overflow\n");
+	}
+	else if(front==-1 && rear ==-1)
+	{
+		q[++rear]=val;
+		front=0;
+	}
+	else
+	{
+		q[++rear]=val;
+	}
+}
+int deque()
+{
+	if(front==-1 && rear==-1)
+	{
+		return -1;//return front or rear
+	}
+	else if(front==rear)
+	{
+		front=-1;
+		rear=-1;
+		return val;	
+	}
+	else
+	{
+		val=q[front];
+		front++;
+		return val;
+	}
+	
+}
+void display()
+{
+	int i;
+	if(front==0 && rear==n-1)
+	{
+		printf("stack is full\n");
+	}
+	else
+	{
+		for(i=front;i<=rear;i++)
+		{
+			printf("%d",q[i]);
+		}
+		printf("\n");
+	}
+}
+int main()
+{
+	int ch;
+	scanf("%d",&n);
+	q=(int *)calloc(n,sizeof(int));
+	while(1)
+	{
+		printf("1. enque() 2. deque()  3. display 4. exit\n");
+		scanf("%d",&ch);
+		if(ch==1)
+		{
+			scanf("%d",&val);
+			enque(val);
+		}
+		else if(ch==2)
+		{
+			val=deque();
+			if(val==-1)
+			{
+				printf("under flow\n");
+			}
+			else
+			{
+			printf("%d\n",val);
+		    }
+		}
+		else if(ch==3)
+		{
+			display();
+		}
+		else
+		{
+			break;
+		}
+	}
+}
