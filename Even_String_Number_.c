@@ -1,0 +1,66 @@
+#include<stdio.h>
+int main()
+{
+    char s[100];
+    int i,a[100],k=0,j,m,q,max=1000,c=0,temp;
+    scanf("%s",s);
+    for(i=0;s[i]!=NULL;i++)
+    {
+        if(s[i]>='0' && s[i]<='9')
+        {
+            a[k++]=(int)s[i]-48;
+        }
+    }
+    for(i=0;i<k;i++)
+    {
+        for(j=i+1;j<k;j++)
+        {
+            if(a[i]==a[j])
+            {
+                for(m=j;m<k;m++)
+                {
+                    a[m]=a[m+1];
+                }
+                j--;
+                k--;
+            }
+        }
+    }
+    for(i=0;i<k;i++)
+    {
+        if(a[i]%2==0 && a[i]<max)
+        {
+            max=a[i];
+            c++;
+            q=i;
+        }
+    }
+    if(c==0)
+    {
+        printf("-1");
+    }
+    else
+    {
+        for(i=q;i<k-1;i++)
+        {
+            a[i]=a[i+1];
+        }
+        for(i=0;i<k-1;i++)
+        {
+            for(j=i+1;j<k-1;j++)
+            {
+                if(a[i]>a[j])
+                {
+                    temp=a[i];
+                    a[i]=a[j];
+                    a[j]=temp;
+                }
+            }
+        }
+        for(i=k-2;i>=0;i--)
+        {
+            printf("%d",a[i]);
+        }
+        printf("%d",max);
+    }
+}
